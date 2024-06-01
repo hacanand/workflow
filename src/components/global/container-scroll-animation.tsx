@@ -1,15 +1,13 @@
-'use client'
+"use client";
 import React, { useRef } from "react";
-
+import { useScroll, useTransform, motion } from "framer-motion";
 import Image from "next/image";
-   import { motion, useScroll, useTransform } from "framer-motion";
 
 export const ContainerScroll = ({
   titleComponent,
 }: {
   titleComponent: string | React.ReactNode;
 }) => {
-
   const containerRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -37,7 +35,7 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className="h-[80rem] flex items-center justify-center relative p-20"
+      className="h-[80rem] flex items-center justify-center relative md:p-20"
       ref={containerRef}
     >
       <div
