@@ -13,6 +13,7 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { Loader2 } from "lucide-react";
 
 type Props = {};
 
@@ -30,7 +31,7 @@ const ProfileForm = (props: Props) => {
   return (
     <FormProvider {...form}>
       <form
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-4 pt-4"
         // onSubmit={form.handleSubmit(handleSubmit)}
       >
         <FormField
@@ -39,7 +40,7 @@ const ProfileForm = (props: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-lg">User full name</FormLabel>
+              <FormLabel className="text-lg">Full Name</FormLabel>
               <FormControl>
                 <Input {...field} placeholder="Name" />
               </FormControl>
@@ -65,7 +66,7 @@ const ProfileForm = (props: Props) => {
             </FormItem>
           )}
         />
-        {/* <Button
+        <Button
           type="submit"
           className="self-start hover:bg-[#2F006B] hover:text-white "
         >
@@ -77,7 +78,7 @@ const ProfileForm = (props: Props) => {
           ) : (
             "Save User Settings"
           )}
-        </Button> */}
+        </Button>
       </form>
     </FormProvider>
   );
