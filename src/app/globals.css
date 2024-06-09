@@ -74,3 +74,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.fileUploaderWrapper lr-file-uploader-regular{
+  --darkmode: 1;
+  --h-accent: 223;
+  --s-accent: 100%;
+  --l-accent: 61%;
+}

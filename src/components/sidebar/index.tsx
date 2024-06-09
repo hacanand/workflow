@@ -16,7 +16,7 @@ import { ModeToggle } from "../global/mode-toggle";
 
 type Props = {};
 
-const MenuOptions = (props: Props) => {
+const SideBar = (props: Props) => {
   const pathName = usePathname();
 
   return (
@@ -98,4 +98,4 @@ const MenuOptions = (props: Props) => {
   );
 };
 
-export default MenuOptions;
+export default SideBar;

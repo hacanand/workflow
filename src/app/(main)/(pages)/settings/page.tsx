@@ -2,10 +2,20 @@ import React from "react";
 import ProfileForm from "@/components/forms/Profile-form";
 import ProfilePicture from "./_components/profile-picture";
 import { db } from "@/lib/db";
+import {   currentUser } from "@clerk/nextjs/server";
 
 type Props = {};
 
-const Settings = (props: Props) => {
+const Settings = async (props: Props) => {
+  // const { userId } = auth()
+  // console.log(userId)
+  //update imageUrl in clerk
+
+  const authUser = await currentUser()
+   //console.log(authUser)
+  if (!authUser) return null;
+  const user = await db.user.findUnique({ where: { clerkId: authUser?.id } });
+ // console.log(user)
   const removeProfilePicture = async () => {
     "use server";
     const response = await db.user.update({
@@ -13,10 +23,36 @@ const Settings = (props: Props) => {
         clerkId: authUser.id,
       },
       data: {
-        profileImage: "",
+        profileImage: '',
       },
     });
-
+    //console.log(response);
+    return response;
+  };
+  const uploadProfilePicture = async (Image: string) => {
+    "use server";
+    const response = await db.user.update({
+      where: {
+        clerkId: authUser.id,
+      },
+      data: {
+        profileImage: Image,
+      },
+    });
+    //console.log(response);
+    return response;
+  };
+  const updateUserInfo = async (name: string) => {
+    "use server";
+    const response = await db.user.update({
+      where: {
+        clerkId: authUser.id,
+      },
+      data: {
+        name,
+      },
+    });
+    
     return response;
   };
   return (
@@ -30,12 +66,12 @@ const Settings = (props: Props) => {
           <p className="text-base text-white/50">
             Add or update your information
           </p>
-          {/* <ProfilePicture
+          <ProfilePicture
             onDelete={removeProfilePicture}
-            userImage={user?.profilePicture || " "}
+            userImage={user?.profileImage|| ""}
             onUpload={uploadProfilePicture}
-          ></ProfilePicture> */}
-          <ProfileForm />
+          />
+          <ProfileForm user={user} onUpdate={updateUserInfo} />
         </div>
       </div>
     </div>
