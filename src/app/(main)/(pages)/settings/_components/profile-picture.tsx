@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { X } from "lucide-react";
-// import UploadCareButton from "./uploadcare-button";
 import { FileUploaderRegular } from "@uploadcare/react-uploader";
 import "@uploadcare/react-uploader/core.css";
 
@@ -43,15 +42,15 @@ const ProfilePicture = ({ onDelete, onUpload, userImage }: Props) => {
         <div className="flex h-[30vh] flex-col items-center justify-center">
           {userImage ? (
             <>
-              <div className="relative h-full w-6/12">
+              <div className="relative h-full w-4/12">
                 <Image
                   src={userImage}
-                  alt={files[0]?.uuid}
-                  layout="fill"
-                 
-                  objectFit=""
+                  loading="lazy"
+                  alt="profile picture"
+                  width={500}
+                  height={500}
+                  className="object-cover  "
                 />
-                 
               </div>
               <Button
                 onClick={onRemoveProfilePicture}
@@ -63,7 +62,7 @@ const ProfilePicture = ({ onDelete, onUpload, userImage }: Props) => {
           ) : (
             <FileUploaderRegular
               onChange={handleChangeEvent}
-              pubkey="33cf260e673da7b89303"
+              pubkey={process.env.UPLOADCARE_PUBLIC_KEY}
               className="my-config fileUploaderWrapper "
               onDoneClick={handleUpload}
             />

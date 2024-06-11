@@ -27,6 +27,7 @@ const ConnectionCard = ({
                   <Image
                       src={icon}
                       alt={title}
+                      loading='lazy'
                       width={40}
                       height={40}
                       className='object-contain'
