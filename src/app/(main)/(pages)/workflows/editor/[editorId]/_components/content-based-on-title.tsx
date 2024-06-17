@@ -11,11 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { onContentChange } from "@/lib/editor-utils";
+// import { onContentChange } from "@/lib/editor-utils";
 import GoogleFileDetails from "./google-file-details";
 import GoogleDriveFiles from "./google-drive-files";
 import ActionButton from "./action-button";
-import { getFileMetaData } from "@/app/(main)/(pages)/connections/_actions/google-connection";
+// import { getFileMetaData } from "@/app/(main)/(pages)/connections/_actions/google-connection";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -124,12 +124,12 @@ const ContentBasedOnTitle = ({
             </Card>
           )}
           {title === "Google Drive" && <GoogleDriveFiles />}
-          {/* <ActionButton
+          <ActionButton
             currentService={title}
             nodeConnection={nodeConnection}
             channels={selectedSlackChannels}
             setChannels={setSelectedSlackChannels}
-          /> */}
+          />
         </div>
       </Card>
     </AccordionContent>

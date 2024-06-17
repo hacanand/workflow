@@ -1,48 +1,62 @@
 "use client";
+import { EditorCanvasTypes, EditorNodeType } from "@/lib/types";
+import { useNodeConnections } from "@/providers/connections-provider";
+import { useEditor } from "@/providers/editor-provider";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import React, { useEffect } from "react";
+import { Separator } from "@/components/ui/separator";
+import { CONNECTIONS, EditorCanvasDefaultCardTypes } from "@/lib/constants";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import { CONNECTIONS, EditorCanvasDefaultCardTypes } from "@/lib/constants";
-import { onDragStart } from "@/lib/editor-utils";
 import {
-  EditorCanvasCardType,
-  EditorCanvasTypes,
-  EditorNodeType,
-} from "@/lib/types";
-import { useEditor } from "@/providers/editor-provider";
-import { TabsTrigger } from "@radix-ui/react-tabs";
-import React from "react";
+  // fetchBotSlackChannels,
+  // onConnections,
+  onDragStart,
+} from "@/lib/editor-utils";
 import EditorCanvasIconHelper from "./editor-canvas-icon-helper";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AccordionContent } from "@radix-ui/react-accordion";
 import RenderConnectionAccordion from "./render-connection-accordion";
-// import { RenderOutputAccordion } from "./render-output.accordian";
+import  RenderOutputAccordion  from "./render-output.accordian";
+import { useWorkflowStore } from "@/store";
+
 type Props = {
   nodes: EditorNodeType[];
 };
+
 const EditorCanvasSidebar = ({ nodes }: Props) => {
- 
-  //WIP :Connect DB stuff
   const { state } = useEditor();
+  const { nodeConnection } = useNodeConnections();
+   const { googleFile, setSlackChannels } = useWorkflowStore();
+  // useEffect(() => {
+  //   if (state) {
+  //     onConnections(nodeConnection, state, googleFile);
+  //   }
+  // }, [state]);
+
+  // useEffect(() => {
+  //   if (nodeConnection.slackNode.slackAccessToken) {
+  //     fetchBotSlackChannels(
+  //       nodeConnection.slackNode.slackAccessToken,
+  //       setSlackChannels
+  //     );
+  //   }
+  // }, [nodeConnection]);
+
   return (
     <aside>
       <Tabs defaultValue="actions" className="h-screen overflow-scroll pb-24">
         <TabsList className="bg-transparent">
-          <TabsTrigger value="actions" className="px-2 focus:text-white focus-within:font-bold">
-            Actions
-          </TabsTrigger>
-          <TabsTrigger value="settings" className="focus:text-white focus-within:font-bold">
-            Settings
-          </TabsTrigger>
+          <TabsTrigger value="actions">Actions</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <Separator />
         <TabsContent value="actions" className="flex flex-col gap-4 p-4">
@@ -71,12 +85,13 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
               </Card>
             ))}
         </TabsContent>
-        <TabsContent value="settings" className="mt-6">
-          <div className="px-2 py-2 text-center text-xl font-bold">
+        <TabsContent value="settings" className="-mt-6">
+          <div className="px-2 py-4 text-center text-xl font-bold">
             {state.editor.selectedNode.data.title}
           </div>
+
           <Accordion type="multiple">
-            <AccordionItem value="options" className="border-y-[1px] px-2">
+            <AccordionItem value="Options" className="border-y-[1px] px-2">
               <AccordionTrigger className="!no-underline">
                 Account
               </AccordionTrigger>
@@ -84,8 +99,8 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                 {CONNECTIONS.map((connection) => (
                   <RenderConnectionAccordion
                     key={connection.title}
-                    connection={connection}
                     state={state}
+                    connection={connection}
                   />
                 ))}
               </AccordionContent>
@@ -94,10 +109,10 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
               <AccordionTrigger className="!no-underline">
                 Action
               </AccordionTrigger>
-              {/* <RenderOutputAccordion
+              <RenderOutputAccordion
                 state={state}
                 nodeConnection={nodeConnection}
-              /> */}
+              />
             </AccordionItem>
           </Accordion>
         </TabsContent>
@@ -105,4 +120,5 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
     </aside>
   );
 };
+
 export default EditorCanvasSidebar;

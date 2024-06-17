@@ -1,4 +1,4 @@
-import { EditorCanvasCardType } from '@/lib/types'
+ import { EditorCanvasCardType } from '@/lib/types'
 import { useEditor } from '@/providers/editor-provider'
 import React, { useMemo } from 'react'
 import { Position, useNodeId } from 'reactflow'
@@ -47,11 +47,11 @@ const EditorCanvasCardSingle = ({ data }: { data: EditorCanvasCardType }) => {
                     <div>
                         <CardTitle className='text-md'>{data.title}</CardTitle>
                         <CardDescription>
-                            <p className=' text-xs text-muted-foreground/50'>
-                                <b className='text-muted-foreground/80'>ID:</b>
+                            <div className=' text-xs text-muted-foreground/50'>
+                                < span className='text-muted-foreground/80'>ID:</span>
                                 {nodeId}
-                            </p>
-                            <p>{ data.description}</p>
+                            </div>
+                            <span>{ data.description}</span>
                         </CardDescription>
                     </div>
                 </CardHeader>
