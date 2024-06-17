@@ -2,9 +2,11 @@
 import { Button } from '@/components/ui/button'
 import { useNodeConnections } from '@/providers/connections-provider'
 import { usePathname } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { onCreateNodesEdges, onFlowPublish } from '../_actions/workflow-connections'
+import { useWorkflowStore } from '@/store'
+
 
 type Props = {
     children:React.ReactNode
@@ -30,6 +32,23 @@ const FlowInstance = ({ children, edges, nodes }: Props) => {
         const response = await onFlowPublish(pathname.split('/').pop()!, true)
      if(response) toast.message(response.message)   
     },[])
+
+    const onAutomateFlow = async() => {
+        const flows: any = [];
+        const connectedEdges = edges.map((edge) => edge.tsrget)
+        connectedEdges.map((target) => {
+            nodes.map((node) => {
+                if (node.id === target) {
+                    flows.push(node.type)
+                }
+            })
+        })
+        setIsFlow(flows)
+    }
+    useEffect(() => {
+        onAutomateFlow()
+    
+    },[edges])
 
   return (
       <div className='flex flex-col gap-2'>

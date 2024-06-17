@@ -5,6 +5,7 @@ import { useEditor } from "@/providers/editor-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React, { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
+
 import { CONNECTIONS, EditorCanvasDefaultCardTypes } from "@/lib/constants";
 import {
   Card,
@@ -36,11 +37,11 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { state } = useEditor();
   const { nodeConnection } = useNodeConnections();
    const { googleFile, setSlackChannels } = useWorkflowStore();
-  // useEffect(() => {
-  //   if (state) {
-  //     onConnections(nodeConnection, state, googleFile);
-  //   }
-  // }, [state]);
+  useEffect(() => {
+    if (state) {
+      onConnections(nodeConnection, state, googleFile);
+    }
+  }, [state]);
 
   // useEffect(() => {
   //   if (nodeConnection.slackNode.slackAccessToken) {
