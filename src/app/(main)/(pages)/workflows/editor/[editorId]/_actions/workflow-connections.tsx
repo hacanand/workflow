@@ -22,6 +22,6 @@ export const onFlowPublish = async (flowId: string, status: boolean) => {
             publish: status
         }
     })
-    if (flow) return { message: 'Workflow Published' }
+    if (flow.publish) return { message: 'Workflow Published' }
     return { message: 'Workflow Not Published' }
 }

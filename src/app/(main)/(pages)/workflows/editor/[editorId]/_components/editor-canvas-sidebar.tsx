@@ -14,6 +14,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  fetchBotSlackChannels,
+  onConnections,
   // fetchBotSlackChannels,
   // onConnections,
   onDragStart,
@@ -43,14 +45,14 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
     }
   }, [state]);
 
-  // useEffect(() => {
-  //   if (nodeConnection.slackNode.slackAccessToken) {
-  //     fetchBotSlackChannels(
-  //       nodeConnection.slackNode.slackAccessToken,
-  //       setSlackChannels
-  //     );
-  //   }
-  // }, [nodeConnection]);
+  useEffect(() => {
+    if (nodeConnection.slackNode.slackAccessToken) {
+      fetchBotSlackChannels(
+        nodeConnection.slackNode.slackAccessToken,
+        setSlackChannels
+      );
+    }
+  }, [nodeConnection]);
 
   return (
     <aside>
