@@ -3,9 +3,9 @@ import { EditorCanvasTypes, EditorNodeType } from "@/lib/types";
 import { useNodeConnections } from "@/providers/connections-provider";
 import { useEditor } from "@/providers/editor-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import React, { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-
 import { CONNECTIONS, EditorCanvasDefaultCardTypes } from "@/lib/constants";
 import {
   Card,
@@ -16,8 +16,6 @@ import {
 import {
   fetchBotSlackChannels,
   onConnections,
-  // fetchBotSlackChannels,
-  // onConnections,
   onDragStart,
 } from "@/lib/editor-utils";
 import EditorCanvasIconHelper from "./editor-canvas-icon-helper";
@@ -28,7 +26,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import RenderConnectionAccordion from "./render-connection-accordion";
-import  RenderOutputAccordion  from "./render-output.accordian";
+import RenderOutputAccordion from  "./render-output-accordian";
 import { useWorkflowStore } from "@/store";
 
 type Props = {
@@ -38,7 +36,7 @@ type Props = {
 const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { state } = useEditor();
   const { nodeConnection } = useNodeConnections();
-   const { googleFile, setSlackChannels } = useWorkflowStore();
+  const { googleFile, setSlackChannels } = useWorkflowStore();
   useEffect(() => {
     if (state) {
       onConnections(nodeConnection, state, googleFile);

@@ -2,7 +2,7 @@ import { ConnectionProviderProps } from "@/providers/connections-provider";
 import { EditorCanvasCardType } from "./types";
 import { EditorState } from "@/providers/editor-provider";
 import { getDiscordConnectionUrl } from "@/app/(main)/(pages)/connections/_components/_actions/discord-connection";
-import { getNotionConnection, getNotionDatabase } from "@/app/(main)/(pages)/connections/_components/_actions/notion-connecttion";
+import { getNotionConnection, getNotionDatabase } from "@/app/(main)/(pages)/connections/_components/_actions/notion-connection";
 import { getSlackConnection, listBotChannels } from "@/app/(main)/(pages)/connections/_components/_actions/slack-connection";
 import { Option } from "@/components/ui/multiple-selector";
 
@@ -98,6 +98,48 @@ export const onConnections = async (
     }
   }
 }
+export const onSlackContent = (
+  nodeConnection: ConnectionProviderProps,
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  nodeConnection.setSlackNode((prev: any) => ({
+    ...prev,
+    content: event.target.value,
+  }));
+};
+
+export const onDiscordContent = (
+  nodeConnection: ConnectionProviderProps,
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  nodeConnection.setDiscordNode((prev: any) => ({
+    ...prev,
+    content: event.target.value,
+  }));
+};
+export const onNotionContent = (
+  nodeConnection: ConnectionProviderProps,
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  nodeConnection.setNotionNode((prev: any) => ({
+    ...prev,
+    content: event.target.value,
+  }));
+};
+
+export const onContentChange = (
+  nodeConnection: ConnectionProviderProps,
+  nodeType: string,
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  if (nodeType === "Slack") {
+    onSlackContent(nodeConnection, event);
+  } else if (nodeType === "Discord") {
+    onDiscordContent(nodeConnection, event);
+  } else if (nodeType === "Notion") {
+    onNotionContent(nodeConnection, event);
+  }
+};
 
 export const fetchBotSlackChannels = async(
   token: string,

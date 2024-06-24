@@ -3,7 +3,7 @@ import React from "react";
 import ConnectionCard from "./_components/connection-card";
 import { currentUser } from "@clerk/nextjs/server";
 import { onDiscordConnect } from "./_components/_actions/discord-connection";
-import { onNotionConnect } from "./_components/_actions/notion-connecttion";
+import { onNotionConnect } from "./_components/_actions/notion-connection";
 import { onSlackConnect } from "./_components/_actions/slack-connection";
 import { getUserData } from "./_components/_actions/get-user";
 
@@ -118,7 +118,7 @@ const Connections = async (props: Props) => {
               title={connection.title}
               icon={connection.image}
               description={connection.description}
-            connected={undefined}
+              connected={connections}
             />
           ))}
         </section>

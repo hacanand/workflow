@@ -11,11 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// import { onContentChange } from "@/lib/editor-utils";
+import { onContentChange } from "@/lib/editor-utils";
 import GoogleFileDetails from "./google-file-details";
 import GoogleDriveFiles from "./google-drive-files";
 import ActionButton from "./action-button";
-// import { getFileMetaData } from "@/app/(main)/(pages)/connections/_actions/google-connection";
+//  import { getFileMetaData } from "@/app/(main)/(pages)/connections/_actions/google-connection";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -58,7 +58,7 @@ const ContentBasedOnTitle = ({
         "/api/drive"
       );
       if (response) {
-        console.log(response.data.message.files[0]);
+      //  console.log(response.data.message.files[0]);
         toast.message("Fetched File");
         setFile(response.data.message.files[0]);
       } else {
@@ -104,7 +104,7 @@ const ContentBasedOnTitle = ({
           <Input
             type="text"
             value={nodeConnectionType.content}
-            // onChange={(event) => onContentChange(nodeConnection, title, event)}
+             onChange={(event) => onContentChange(nodeConnection, title, event)}
           />
 
           {JSON.stringify(file) !== "{}" && title !== "Google Drive" && (

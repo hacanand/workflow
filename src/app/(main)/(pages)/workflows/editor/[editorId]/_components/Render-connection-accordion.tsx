@@ -67,8 +67,8 @@ const RenderConnectionAccordion = ({
   const { slackChannels, selectedSlackChannels, setSelectedSlackChannels } =
     useWorkflowStore();
 
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  // const [open, setOpen] = React.useState(false);
+  // const [value, setValue] = React.useState("");
 
   const connectionData = (nodeConnection as any)[connectionKey];
 
