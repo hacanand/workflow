@@ -58,7 +58,7 @@ export async function GET() {
       },
     });  
     
-   // console.log(listener)
+  //  console.log(listener)
     if (listener.status === 200) {
       const channelStored = await db.user.updateMany({
         where: {

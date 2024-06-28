@@ -3,7 +3,7 @@
 import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { Client } from "@notionhq/client";
-
+ 
 export const onNotionConnect = async (
   access_token: string,
   workspace_id: string,
@@ -27,7 +27,7 @@ export const onNotionConnect = async (
         },
       },
     });
-
+ 
     if (!notion_connected) {
       //create connection
       await db.notion.create({
@@ -82,16 +82,40 @@ export const onCreateNewPageInDatabase = async (
   const notion = new Client({
     auth: accessToken,
   });
+ 
+  async function createParentPage(pageName:any) {
+    try {
+      const response = await notion.pages.create({
+        parent: { type: 'page_id', page_id: databaseId },
+        properties: {
+          title: [
+            {
+              type: "text",
+              text: {
+                content: pageName,
+              },
+            },
+          ],
+        },
+      });
 
-  // console.log(databaseId);
+      return response.id;
+    } catch (error) {
+      console.error("Error creating page:", error.body);
+      return null;
+    }
+  }
+  const parentPageId = await createParentPage("New Page");
+  console.log(parentPageId);
   const response = await notion.pages.create({
     parent: {
-      type: "database_id",
-      database_id: databaseId,
+      type: "page_id",
+      page_id: databaseId
     },
     properties: {
-      name: [
+      title: [
         {
+          type: "text",
           text: {
             content: content,
           },

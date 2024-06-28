@@ -35,7 +35,7 @@ const FlowInstance = ({ children, edges, nodes }: Props) => {
 
     const onAutomateFlow = async() => {
         const flows: any = [];
-        const connectedEdges = edges.map((edge) => edge.tsrget)
+        const connectedEdges = edges.map((edge) => edge.target)
         connectedEdges.map((target) => {
             nodes.map((node) => {
                 if (node.id === target) {

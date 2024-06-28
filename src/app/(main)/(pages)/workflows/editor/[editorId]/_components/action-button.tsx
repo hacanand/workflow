@@ -23,7 +23,7 @@ const ActionButton = ({
   setChannels,
 }: Props) => {
   const pathname = usePathname();
-
+  console.log(nodeConnection);
   const onSendDiscordMessage = useCallback(async () => {
     const response = await postContentToWebHook(
       nodeConnection.discordNode.content,
@@ -39,11 +39,11 @@ const ActionButton = ({
   }, [nodeConnection.discordNode]);
 
   const onStoreNotionContent = useCallback(async () => {
-    console.log(
-      nodeConnection.notionNode.databaseId,
-      nodeConnection.notionNode.accessToken,
-      nodeConnection.notionNode.content
-    );
+    // console.log(
+    //   nodeConnection.notionNode.databaseId,
+    //   nodeConnection.notionNode.accessToken,
+    //   nodeConnection.notionNode.content
+    // );
     const response = await onCreateNewPageInDatabase(
       nodeConnection.notionNode.databaseId,
       nodeConnection.notionNode.accessToken,
@@ -122,10 +122,7 @@ const ActionButton = ({
       case "Discord":
         return (
           <>
-            <Button
-              variant="outline"
-              onClick={onSendDiscordMessage}
-            >
+            <Button variant="outline" onClick={onSendDiscordMessage}>
               Test Message
             </Button>
             <Button onClick={onCreateLocalNodeTempate} variant="outline">
@@ -137,10 +134,7 @@ const ActionButton = ({
       case "Notion":
         return (
           <>
-            <Button
-              variant="outline"
-              onClick={onStoreNotionContent}
-            >
+            <Button variant="outline" onClick={onStoreNotionContent}>
               Test
             </Button>
             <Button onClick={onCreateLocalNodeTempate} variant="outline">
@@ -152,9 +146,7 @@ const ActionButton = ({
       case "Slack":
         return (
           <>
-            <Button variant="outline"
-              onClick={onStoreSlackContent}
-            >
+            <Button variant="outline" onClick={onStoreSlackContent}>
               Send Message
             </Button>
             <Button onClick={onCreateLocalNodeTempate} variant="outline">

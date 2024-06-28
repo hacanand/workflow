@@ -28,8 +28,7 @@ import { v4 } from "uuid";
 import { EditorCanvasDefaultCardTypes } from "@/lib/constants";
 import FlowInstance from "./flow-instance";
 import EditorCanvasSidebar from "./editor-canvas-sidebar";
-// import EditorCanvasSidebar from "./editor-canvas-sidebar";
-// import { onGetNodesEdges } from "../../../_actions/workflow-connections";
+import { onGetNodesEdges } from "../../../_actions/workflow-connections";
 
 type Props = {};
 
@@ -166,14 +165,14 @@ const EditorCanvas = (props: Props) => {
   );
 
   const onGetWorkFlow = async () => {
-    // setIsWorkFlowLoading(true);
-    // const response = await onGetNodesEdges(pathname.split("/").pop()!);
-    // if (response) {
-    //   setEdges(JSON.parse(response.edges!));
-    //   setNodes(JSON.parse(response.nodes!));
-    //   setIsWorkFlowLoading(false);
-    // }
-    // setIsWorkFlowLoading(false);
+    setIsWorkFlowLoading(true);
+    const response = await onGetNodesEdges(pathname.split("/").pop()!);
+    if (response) {
+      setEdges(JSON.parse(response.edges!));
+      setNodes(JSON.parse(response.nodes!));
+      setIsWorkFlowLoading(false);
+    }
+    setIsWorkFlowLoading(false);
   };
 
   useEffect(() => {
@@ -230,7 +229,7 @@ const EditorCanvas = (props: Props) => {
                   //@ts-ignore
                   variant="dots"
                   gap={12}
-                    size={1}
+                  size={1}
                   color="#00f"
                 />
               </ReactFlow>

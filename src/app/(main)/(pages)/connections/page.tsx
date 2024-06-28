@@ -31,7 +31,7 @@ const Connections = async (props: Props) => {
     bot_user_id,
     team_id,
     team_name,
-  } = props.searchParams ?? {
+  } = props.searchParams??  {
     webhook_id: '',
     webhook_name: '',
     webhook_url: '',

@@ -138,7 +138,7 @@ export const onCreateNodeTemplate = async (
 export const onGetWorkflows = async () => {
   const user = await currentUser();
   if (user) {
-    const workflow = await db.workflows.findMany({
+    const workflow = await db?.workflows?.findMany({
       where: {
         userId: user.id,
       },
