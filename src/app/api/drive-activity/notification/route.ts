@@ -1,13 +1,13 @@
-// import { postContentToWebHook } from "@/app/(main)/(pages)/connections/_actions/discord-connection";
-// import { onCreateNewPageInDatabase } from "@/app/(main)/(pages)/connections/_actions/notion-connection";
-// import { postMessageToSlack } from "@/app/(main)/(pages)/connections/_actions/slack-connection";
+import { postContentToWebHook } from "@/app/(main)/(pages)/connections/_components/_actions/discord-connection";
+import { onCreateNewPageInDatabase } from "@/app/(main)/(pages)/connections/_components/_actions/notion-connection";
+import { postMessageToSlack } from "@/app/(main)/(pages)/connections/_components/_actions/slack-connection";
 import { db } from "@/lib/db";
 import axios from "axios";
 import { headers } from "next/headers";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  console.log("🔴 Changed");
+  // console.log("🔴 Changed");
   const headersList = headers();
   let channelResourceId;
   headersList.forEach((value, key) => {
@@ -30,12 +30,12 @@ export async function POST(req: NextRequest) {
         },
       });
       if (workflow) {
-        workflow.map(async (flow) => {
+        workflow?.map(async (flow) => {
           const flowPath = JSON.parse(flow.flowPath!);
           let current = 0;
-          while (current < flowPath.length) {
+          while (current < flowPath?.length) {
             if (flowPath[current] == "Discord") {
-              const discordMessage = await db.discordWebhook.findFirst({
+              const discordMessage = await db?.discordWebhook?.findFirst({
                 where: {
                   userId: flow.userId,
                 },
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
                 channels,
                 flow.slackTemplate!
               );
-              flowPath.splice(flowPath[current], 1);
+              flowPath?.splice(flowPath[current], 1);
             }
             if (flowPath[current] == "Notion") {
               await onCreateNewPageInDatabase(
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
                 flow.notionAccessToken!,
                 JSON.parse(flow.notionTemplate!)
               );
-              flowPath.splice(flowPath[current], 1);
+              flowPath?.splice(flowPath[current], 1);
             }
 
             if (flowPath[current] == "Wait") {
