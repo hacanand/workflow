@@ -1,3 +1,4 @@
+'use server'
 import { google } from "googleapis";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
@@ -46,7 +47,7 @@ export async function GET() {
       throw new Error("startPageToken is unexpectedly null");
     }
 
-    const listener = await drive.changes.watch({
+    const listener =  await drive.changes.watch({
       pageToken: startPageToken,
       supportsAllDrives: true,
       supportsTeamDrives: true,
