@@ -2,6 +2,7 @@ import React from "react";
 import Workflow from "./workflow";
 import { onGetWorkflows } from "../_actions/workflow-connections";
 import { divMode } from "@tsparticles/engine";
+import MoreCredits from "./more-credits";
 
 type Props = {};
 
@@ -10,6 +11,7 @@ const Workflows = async (props: Props) => {
   return (
     <div className="relative flex flex-col gap-4">
       <section className="flex flex-col gap-4 p-6">
+        <MoreCredits/>
         {workflows?.length
           ? workflows.map((flow ) => (
               <Workflow

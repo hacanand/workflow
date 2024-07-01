@@ -82,31 +82,7 @@ export const onCreateNewPageInDatabase = async (
   const notion = new Client({
     auth: accessToken,
   });
- 
-  async function createParentPage(pageName:any) {
-    try {
-      const response = await notion.pages.create({
-        parent: { type: 'page_id', page_id: databaseId },
-        properties: {
-          title: [
-            {
-              type: "text",
-              text: {
-                content: pageName,
-              },
-            },
-          ],
-        },
-      });
 
-      return response.id;
-    } catch (error) {
-      console.error("Error creating page:", error.body);
-      return null;
-    }
-  }
-  const parentPageId = await createParentPage("New Page");
-  console.log(parentPageId);
   const response = await notion.pages.create({
     parent: {
       type: "page_id",

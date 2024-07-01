@@ -6,3 +6,30 @@ type BillingProviderProps = {
     setCredits: React.Dispatch<React.SetStateAction<string>>
     setTier: React.Dispatch<React.SetStateAction<string>>
 }
+const initialValues: BillingProviderProps = {
+    credits: '',
+    setCredits: () => undefined,
+    tier: '',
+    setTier: () => undefined,
+}
+type WithChildProps = {
+    children: React.ReactNode
+}
+const context = React.createContext(initialValues)
+const { Provider } = context
+export const BillingProvider = ({ children }: WithChildProps) => {
+    const [credits, setCredits] = React.useState(initialValues.credits)
+    const [tier, setTier] = React.useState(initialValues.tier)
+    const values = {
+        credits,
+        setCredits,
+        tier,
+        setTier,
+    }
+    return <Provider value={values}>{children}</Provider>
+}
+export const useBilling = () => {
+    const values = React.useContext(context)
+    return values
+}
+//7.29
