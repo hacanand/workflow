@@ -18,7 +18,7 @@ import {
   onConnections,
   onDragStart,
 } from "@/lib/editor-utils";
- import EditorCanvasIconHelper from "./editor-canvas-icon-helper";
+import EditorCanvasIconHelper from "./editor-canvas-icon-helper";
 import {
   Accordion,
   AccordionContent,
@@ -26,7 +26,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import RenderOutputAccordion from "./render-output-accordion";
-import RenderConnectionAccordion from "./render-connection-accordion";
+// import RenderConnectionAccordion from "./render-connection-accordion";
 import { useWorkflowStore } from "@/store";
 
 type Props = {
@@ -97,13 +97,13 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                 Account
               </AccordionTrigger>
               <AccordionContent>
-                {CONNECTIONS?.map((connection) => (
+                {/* {CONNECTIONS?.map((connection) => (
                   <RenderConnectionAccordion
                     key={connection.title}
                     state={state}
                     connection={connection}
                   />
-                ))}
+                ))} */}
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="Expected Output" className="px-2">

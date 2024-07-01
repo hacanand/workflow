@@ -118,5 +118,4 @@ const RenderConnectionAccordion = ({
     </AccordionContent>
   );
 };
-
 export default RenderConnectionAccordion;
