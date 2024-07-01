@@ -26,7 +26,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import RenderOutputAccordion from "./render-output-accordian";
-import RenderConnectionAccordion from "./render-connection-accordion";
+import RenderConnectionAccordion from "./render-connection-accor";
 import { useWorkflowStore } from "@/store";
 
 type Props = {
