@@ -99,6 +99,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
               <AccordionContent>
                 {CONNECTIONS?.map((connection) => (
                   <RenderConnectionAccordion
+                    key={connection.title}
                     state={state}
                     connection={connection}
                   />
